@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.5.2",
@@ -20,6 +21,10 @@
     "urql": "^1.10.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.17.7",
+    "@graphql-codegen/typescript": "1.17.7",
+    "@graphql-codegen/typescript-operations": "1.17.7",
+    "@graphql-codegen/typescript-urql": "^2.0.0",
     "@types/node": "^14.0.27",
     "typescript": "^3.9.7"
   }
