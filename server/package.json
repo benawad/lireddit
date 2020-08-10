@@ -19,9 +19,11 @@
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.7",
     "@types/express-session": "^1.17.0",
+    "@types/ioredis": "^4.17.3",
     "@types/node": "^14.0.27",
     "@types/nodemailer": "^6.4.0",
     "@types/redis": "^2.8.25",
+    "@types/uuid": "^8.0.1",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
@@ -38,11 +40,12 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "graphql": "^15.3.0",
+    "ioredis": "^4.17.3",
     "nodemailer": "^6.4.11",
     "pg": "^8.3.0",
-    "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^1.0.0-rc.3"
+    "type-graphql": "^1.0.0-rc.3",
+    "uuid": "^8.3.0"
   },
   "mikro-orm": {
     "useTsNode": true,
