@@ -1797,11 +1797,19 @@
   dependencies:
     "@types/node" "*"
 
-"@urql/core@^1.12.3":
+"@urql/core@>=1.12.3", "@urql/core@^1.12.3":
   version "1.12.3"
   resolved "https://registry.yarnpkg.com/@urql/core/-/core-1.12.3.tgz#74f7b8e073cf706380bb3dd28484b8136cc96905"
   integrity sha512-e4IXXQ4nes3KyusgYV925DuzfDAfo4ex7Ls3tZfOExkxEcXh0i0XnizXp0rvZmWRch69YCkc+Lh1Gy2aY49HTQ==
   dependencies:
+    wonka "^4.0.14"
+
+"@urql/exchange-graphcache@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-graphcache/-/exchange-graphcache-3.0.2.tgz#074db388c1b301660f298336fd6dbc6d09340364"
+  integrity sha512-spFdJRpHXBfpF9+RcmzKDIjYds/x256dBvBYyf7Mo3MRE4xn7hQzqVnTzT+jpnokhvngzkjjzy7TIz2L5BFxyA==
+  dependencies:
+    "@urql/core" ">=1.12.3"
     wonka "^4.0.14"
 
 "@use-it/event-listener@^0.1.2":
