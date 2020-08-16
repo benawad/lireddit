@@ -981,6 +981,11 @@ cssfilter@0.0.10:
   resolved "https://registry.yarnpkg.com/cssfilter/-/cssfilter-0.0.10.tgz#c6d2672632a2e5c83e013e6864a42ce8defd20ae"
   integrity sha1-xtJnJjKi5cg+AT5oZKQs6N79IK4=
 
+dataloader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.0.0.tgz#41eaf123db115987e21ca93c005cd7753c55fe6f"
+  integrity sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==
+
 debug@2.6.9, debug@^2.2.0:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
