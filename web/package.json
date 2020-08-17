@@ -20,6 +20,7 @@
     "graphql-tag": "^2.11.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.1.7",
+    "next-apollo": "^5.0.0",
     "next-urql": "^1.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
