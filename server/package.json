@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "gen-env": "gen-env-types .env -o src/env.d.ts -e .",
     "build": "tsc",
     "watch": "tsc -w",
     "dev": "nodemon dist/index.js",
@@ -24,6 +25,7 @@
     "@types/nodemailer": "^6.4.0",
     "@types/redis": "^2.8.25",
     "@types/uuid": "^8.0.1",
+    "gen-env-types": "^1.0.3",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
@@ -34,6 +36,7 @@
     "connect-redis": "^5.0.0",
     "cors": "^2.8.5",
     "dataloader": "^2.0.0",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "graphql": "^15.3.0",
