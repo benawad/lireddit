@@ -1,4 +1,3 @@
-import { User } from "../entities/User";
 import { Updoot } from "../entities/Updoot";
 import DataLoader from "dataloader";
 

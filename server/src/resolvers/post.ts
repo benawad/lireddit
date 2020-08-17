@@ -1,25 +1,23 @@
 import {
-  Resolver,
-  Query,
   Arg,
-  Mutation,
-  InputType,
-  Field,
   Ctx,
-  UseMiddleware,
-  Int,
+  Field,
   FieldResolver,
-  Root,
+  InputType,
+  Int,
+  Mutation,
   ObjectType,
-  Info,
+  Query,
+  Resolver,
+  Root,
+  UseMiddleware,
 } from "type-graphql";
-import { Post } from "../entities/Post";
-import { MyContext } from "../types";
-import { isAuth } from "../middleware/isAuth";
 import { getConnection } from "typeorm";
+import { Post } from "../entities/Post";
 import { Updoot } from "../entities/Updoot";
-import { tmpdir } from "os";
 import { User } from "../entities/User";
+import { isAuth } from "../middleware/isAuth";
+import { MyContext } from "../types";
 
 @InputType()
 class PostInput {
@@ -128,8 +126,7 @@ export class PostResolver {
   @Query(() => PaginatedPosts)
   async posts(
     @Arg("limit", () => Int) limit: number,
-    @Arg("cursor", () => String, { nullable: true }) cursor: string | null,
-    @Ctx() { req }: MyContext
+    @Arg("cursor", () => String, { nullable: true }) cursor: string | null
   ): Promise<PaginatedPosts> {
     // 20 -> 21
     const realLimit = Math.min(50, limit);
