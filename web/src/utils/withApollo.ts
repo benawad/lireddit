@@ -9,8 +9,9 @@ const createClient = (ctx: NextPageContext) =>
     credentials: "include",
     headers: {
       cookie:
-        (typeof window === "undefined" ? ctx.req?.headers.cookie : undefined) ||
-        "",
+        (typeof window === "undefined"
+          ? ctx?.req?.headers.cookie
+          : undefined) || "",
     },
     cache: new InMemoryCache({
       typePolicies: {
