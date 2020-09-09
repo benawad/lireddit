@@ -99,7 +99,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
         },
         resolvers: {
           Query: {
-            posts: cursorPagination(),
+            // posts: cursorPagination(),
           },
         },
         updates: {

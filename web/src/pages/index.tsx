@@ -5,70 +5,56 @@ import { useState } from "react";
 import { EditDeletePostButtons } from "../components/EditDeletePostButtons";
 import { Layout } from "../components/Layout";
 import { UpdootSection } from "../components/UpdootSection";
-import { usePostsQuery } from "../generated/graphql";
+import { usePostsQuery, PostsQueryVariables } from "../generated/graphql";
 import { createUrqlClient } from "../utils/createUrqlClient";
 
-const Index = () => {
-  const [variables, setVariables] = useState({
-    limit: 15,
-    cursor: null as null | string,
-  });
+type Props = {
+  variables: PostsQueryVariables;
+  isLastPage: boolean;
+  onLoadMore: (cursor: string) => void;
+};
 
-  const [{ data, error, fetching }] = usePostsQuery({
+const Page = ({ variables, isLastPage, onLoadMore }: Props) => {
+  const [{ data, fetching }] = usePostsQuery({
     variables,
   });
 
-  if (!fetching && !data) {
-    return (
-      <div>
-        <div>you got query failed for some reason</div>
-        <div>{error?.message}</div>
-      </div>
-    );
-  }
-
   return (
-    <Layout>
-      {!data && fetching ? (
-        <div>loading...</div>
-      ) : (
-        <Stack spacing={8}>
-          {data!.posts.posts.map((p) =>
-            !p ? null : (
-              <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                <UpdootSection post={p} />
-                <Box flex={1}>
-                  <NextLink href="/post/[id]" as={`/post/${p.id}`}>
-                    <Link>
-                      <Heading fontSize="xl">{p.title}</Heading>
-                    </Link>
-                  </NextLink>
-                  <Text>posted by {p.creator.username}</Text>
-                  <Flex align="center">
-                    <Text flex={1} mt={4}>
-                      {p.textSnippet}
-                    </Text>
-                    <Box ml="auto">
-                      <EditDeletePostButtons
-                        id={p.id}
-                        creatorId={p.creator.id}
-                      />
-                    </Box>
-                  </Flex>
-                </Box>
-              </Flex>
-            )
-          )}
-        </Stack>
-      )}
-      {data && data.posts.hasMore ? (
+    <>
+      <Stack spacing={8}>
+        {data?.posts.posts.map((p) =>
+          !p ? null : (
+            <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
+              <UpdootSection post={p} />
+              <Box flex={1}>
+                <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                  <Link>
+                    <Heading fontSize="xl">{p.title}</Heading>
+                  </Link>
+                </NextLink>
+                <Text>posted by {p.creator.username}</Text>
+                <Flex align="center">
+                  <Text flex={1} mt={4}>
+                    {p.textSnippet}
+                  </Text>
+                  <Box ml="auto">
+                    <EditDeletePostButtons id={p.id} creatorId={p.creator.id} />
+                  </Box>
+                </Flex>
+              </Box>
+            </Flex>
+          )
+        )}
+      </Stack>
+      {(isLastPage && fetching) || (isLastPage && data?.posts.hasMore) ? (
         <Flex>
           <Button
             onClick={() => {
-              setVariables({
-                limit: variables.limit,
-                cursor: data.posts.posts[data.posts.posts.length - 1].createdAt,
-              });
+              if (data?.posts) {
+                onLoadMore(
+                  data.posts.posts[data.posts.posts.length - 1].createdAt
+                );
+              }
             }}
             isLoading={fetching}
             m="auto"
@@ -78,6 +64,34 @@ const Index = () => {
           </Button>
         </Flex>
       ) : null}
+    </>
+  );
+};
+
+const limit = 15;
+
+const Index = () => {
+  const [pageVariables, setPageVariables] = useState([
+    {
+      limit,
+      cursor: null as null | string,
+    },
+  ]);
+
+  return (
+    <Layout>
+      {pageVariables.map((variables, i) => {
+        return (
+          <Page
+            key={"" + variables.cursor}
+            variables={variables}
+            isLastPage={i === pageVariables.length - 1}
+            onLoadMore={(cursor) =>
+              setPageVariables([...pageVariables, { cursor, limit }])
+            }
+          />
+        );
+      })}
     </Layout>
   );
 };
