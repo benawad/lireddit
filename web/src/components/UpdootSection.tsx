@@ -4,9 +4,11 @@ import {
   PostSnippetFragment,
   useVoteMutation,
   VoteMutation,
+  useMeQuery,
 } from "../generated/graphql";
 import gql from "graphql-tag";
 import { ApolloCache } from "@apollo/client";
+import { isServer } from '../utils/isServer';
 
 interface UpdootSectionProps {
   post: PostSnippetFragment;
@@ -52,6 +54,11 @@ const updateAfterVote = (
 };
 
 export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
+  const {data } = useMeQuery(
+      {
+          skip:isServer(),
+      }
+  );
   const [loadingState, setLoadingState] = useState<
     "updoot-loading" | "downdoot-loading" | "not-loading"
   >("not-loading");
@@ -60,6 +67,9 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
     <Flex direction="column" justifyContent="center" alignItems="center" mr={4}>
       <IconButton
         onClick={async () => {
+           if (!data?.me){
+              return;
+          }
           if (post.voteStatus === 1) {
             return;
           }
@@ -81,6 +91,9 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
       {post.points}
       <IconButton
         onClick={async () => {
+           if (!data?.me){
+              return;
+          }
           if (post.voteStatus === -1) {
             return;
           }
